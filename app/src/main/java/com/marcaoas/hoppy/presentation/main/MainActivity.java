@@ -1,7 +1,7 @@
 package com.marcaoas.hoppy.presentation.main;
 
+import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.View;
@@ -20,11 +20,17 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        configureToolbar();
+        configureDrawerMenu();
 
-        setSupportActionBar(binding.toolbar);
+        //Setting Menu Fragment
+        addFragment(R.id.menu_frame, new MenuFragment());
+    }
 
+    private void configureDrawerMenu() {
         drawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout,
                 binding.toolbar, R.string.app_name, R.string.app_name) {
+
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu();
@@ -36,6 +42,21 @@ public class MainActivity extends BaseActivity {
             }
         };
         binding.drawerLayout.addDrawerListener(drawerToggle);
-        addFragment(R.id.menu_frame, new MenuFragment());
+    }
+
+    private void configureToolbar() {
+        setSupportActionBar(binding.toolbar);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
     }
 }

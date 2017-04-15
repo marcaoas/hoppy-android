@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
-    <color name="darkStatusBar">#f0f0f0</color>
+    <color name="darkStatusBar">#010101</color>
     <color name="colorAccent">#EB4E47</color>
     <color name="defaultBackground">#CDD2D8</color>
     <color name="primaryColorContrast">#F5F7F9</color>

@@ -10,14 +10,4 @@ public class UserMenu {
     public String email;
     public String profileImageUrl;
 
-    public UserMenu(String name, String email, String profileImageUrl) {
-        this.name = name;
-        this.email = email;
-        this.profileImageUrl = profileImageUrl;
-    }
-
-    public UserMenu(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
 }

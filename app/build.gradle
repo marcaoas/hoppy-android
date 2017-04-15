@@ -31,10 +31,14 @@ dependencies {
     })
     testCompile "junit:junit:$junit_version"
 
+    compile "com.android.support:support-v4:$android_support_library_version"
     compile "com.android.support:appcompat-v7:$android_support_library_version"
     compile "com.android.support:design:$android_support_library_version"
     compile "com.android.support.constraint:constraint-layout:1.0.2"
 
     compile "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
 }

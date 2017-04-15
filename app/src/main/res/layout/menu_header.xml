@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable name="user" type="com.marcaoas.hoppy.presentation.menu.models.UserMenu"/>
+    </data>
+
     <LinearLayout
         android:id="@+id/menu_header_root"
         android:orientation="vertical"
@@ -14,7 +19,9 @@
             android:id="@+id/menu_profile_imageView"
             android:layout_width="@dimen/menu_profile_image_size"
             android:layout_height="@dimen/menu_profile_image_size"
-            android:src="@drawable/ic_profile_placeholder"
+            app:imageUrl="@{user.profileImageUrl}"
+            app:imagePlaceholder="@{@drawable/ic_profile_placeholder}"
+            app:imageError="@{@drawable/ic_profile_placeholder}"
             android:background="@drawable/circle_image"/>
 
         <TextView
@@ -23,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/menu_header_padding"
             android:textSize="@dimen/menu_user_name_size"
-            tools:text="Marco Souza"/>
+            android:textStyle="bold"
+            tools:text="@{user.name}"/>
 
         <TextView
             android:id="@+id/menu_user_email_textView"
@@ -31,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/menu_header_content_margin"
             android:textSize="@dimen/menu_user_email_size"
-            tools:text="marcoasouza.1@gmail.com"/>
+            tools:text="@{user.email}"/>
 
     </LinearLayout>
 </layout>

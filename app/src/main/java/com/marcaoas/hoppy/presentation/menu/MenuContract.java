@@ -1,5 +1,6 @@
 package com.marcaoas.hoppy.presentation.menu;
 
+import com.marcaoas.hoppy.presentation.base.BaseView;
 import com.marcaoas.hoppy.presentation.menu.models.UserMenu;
 
 /**
@@ -8,7 +9,7 @@ import com.marcaoas.hoppy.presentation.menu.models.UserMenu;
 
 public interface MenuContract {
 
-    interface View {
+    interface View extends BaseView {
         void setUser(UserMenu user);
     }
 

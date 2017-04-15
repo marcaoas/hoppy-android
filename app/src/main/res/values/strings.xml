@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Hoppy</string>
+    <string name="main_fragment_title">Welcome to Hoppy</string>
+    <string name="nav_brew_steps_title">Brew Steps</string>
+    <string name="nav_my_recipes_title">My Recipes</string>
+    <string name="nav_inventory_title">Inventory</string>
+    <string name="nav_brewing_tools_title">Brewing Tools</string>
+    <string name="nav_shopping_list_title">Shopping List</string>
+    <string name="nav_settings_title">Settings</string>
+    <string name="nav_logout_title">Logout</string>
 </resources>

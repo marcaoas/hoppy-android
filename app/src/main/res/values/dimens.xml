@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="menu_profile_image_size">56dp</dimen>
+    <dimen name="menu_header_padding">16dp</dimen>
+    <dimen name="menu_header_content_margin">8dp</dimen>
+    <dimen name="menu_user_name_size">14sp</dimen>
+    <dimen name="menu_user_email_size">14sp</dimen>
+
+</resources>

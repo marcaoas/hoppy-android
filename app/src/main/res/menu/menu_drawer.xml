@@ -1,0 +1,35 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_brew_steps"
+            android:icon="@drawable/ic_nav_brew_steps"
+            android:title="@string/nav_brew_steps_title" />
+        <item
+            android:id="@+id/nav_my_recipes"
+            android:icon="@drawable/ic_nav_my_recipes"
+            android:title="@string/nav_my_recipes_title" />
+        <item
+            android:id="@+id/nav_inventory"
+            android:icon="@drawable/ic_nav_inventory"
+            android:title="@string/nav_inventory_title" />
+        <item
+            android:id="@+id/nav_brewing_tools"
+            android:icon="@drawable/ic_nav_brewing_tools"
+            android:title="@string/nav_brewing_tools_title" />
+        <item
+            android:id="@+id/nav_shopping_list"
+            android:icon="@drawable/ic_nav_shopping_list"
+            android:title="@string/nav_shopping_list_title" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_nav_settings"
+            android:title="@string/nav_settings_title" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_nav_logout"
+            android:title="@string/nav_logout_title" />
+
+    </group>
+</menu>

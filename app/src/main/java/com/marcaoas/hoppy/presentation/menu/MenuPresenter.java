@@ -20,6 +20,7 @@ public class MenuPresenter extends BasePresenter<MenuContract.View> {
 
     public void loadUser() {
         getUser.execute().map(user -> {
+            //TODO Fazer um mapper
             UserMenu userMenu = new UserMenu();
             userMenu.name = user.getName();
             userMenu.email = user.getEmail();

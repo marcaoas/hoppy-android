@@ -13,7 +13,7 @@ import dagger.Component;
 /**
  * Created by marco on 15/04/17.
  */
-@Component(modules = { MenuModule.class })
+@Component(modules = { MenuModule.class }, dependencies = { ApplicationComponent.class })
 @PerActivity
 public interface MenuComponent {
     MenuPresenter menuPresenter();

@@ -3,6 +3,7 @@ package com.marcaoas.hoppy.data.repositories;
 import com.marcaoas.hoppy.data.stores.system.PreferencesStore;
 import com.marcaoas.hoppy.domain.repositories.SettingsRepository;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
 /**
@@ -21,5 +22,10 @@ public class SettingsRepositoryImpl implements SettingsRepository {
     @Override
     public Flowable<String> getCurrentUserId() {
         return store.getString(CURRENT_USER_ID);
+    }
+
+    @Override
+    public Completable saveCurrentUserId(String currentUserId) {
+        return store.putString(CURRENT_USER_ID, currentUserId);
     }
 }

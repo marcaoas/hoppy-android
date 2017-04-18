@@ -22,7 +22,9 @@
             app:imageUrl="@{user.profileImageUrl}"
             app:imagePlaceholder="@{@drawable/ic_profile_placeholder}"
             app:imageError="@{@drawable/ic_profile_placeholder}"
-            android:background="@drawable/circle_image"/>
+            app:roundedImage="@{true}"
+            android:background="@drawable/circle_image"
+            tools:src="@drawable/ic_profile_placeholder"/>
 
         <TextView
             android:id="@+id/menu_user_name_textView"
@@ -31,7 +33,8 @@
             android:layout_marginTop="@dimen/menu_header_padding"
             android:textSize="@dimen/menu_user_name_size"
             android:textStyle="bold"
-            tools:text="@{user.name}"/>
+            tools:text="Marco Souza"
+            android:text="@{user.name}"/>
 
         <TextView
             android:id="@+id/menu_user_email_textView"
@@ -39,7 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/menu_header_content_margin"
             android:textSize="@dimen/menu_user_email_size"
-            tools:text="@{user.email}"/>
+            tools:text="marcoasouza.1@gmail.com"
+            android:text="@{user.email}"/>
 
     </LinearLayout>
 </layout>

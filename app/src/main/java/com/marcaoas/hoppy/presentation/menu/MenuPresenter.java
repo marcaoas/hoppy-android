@@ -1,7 +1,10 @@
 package com.marcaoas.hoppy.presentation.menu;
 
+import com.marcaoas.hoppy.domain.interactors.user.GetCurrentUserInteractor;
 import com.marcaoas.hoppy.presentation.base.BasePresenter;
 import com.marcaoas.hoppy.presentation.menu.models.UserMenu;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by marco on 15/04/17.
@@ -9,13 +12,22 @@ import com.marcaoas.hoppy.presentation.menu.models.UserMenu;
 
 public class MenuPresenter extends BasePresenter<MenuContract.View> {
 
-    public void loadUser() {
-        UserMenu user = new UserMenu();
-        user.name = "Marco Souza";
-        user.email = "marcoasouza.1@gmail.com";
-        user.profileImageUrl = "https://robohash.org/hoppy?set=set2";
+    private final GetCurrentUserInteractor getUser;
 
-        view.setUser(user);
+    public MenuPresenter(GetCurrentUserInteractor getUser) {
+         this.getUser = getUser;
+    }
+
+    public void loadUser() {
+        getUser.execute().map(user -> {
+            UserMenu userMenu = new UserMenu();
+            userMenu.name = user.getName();
+            userMenu.email = user.getEmail();
+            userMenu.profileImageUrl = user.getProfileImageUrl();
+            return userMenu;
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(user -> {
+            view.setUser(user);
+        });
     }
 
 }

@@ -1,6 +1,7 @@
 package com.marcaoas.hoppy.presentation.di;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.marcaoas.hoppy.presentation.HoppyApplication;
 
@@ -13,6 +14,7 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
+    private static final String PREFERENCES_KEY = "preferences_key";
     private final HoppyApplication application;
 
     public ApplicationModule(HoppyApplication application){
@@ -24,6 +26,13 @@ public class ApplicationModule {
     @ApplicationContext
     Context providesApplicationContext() {
         return application;
+    }
+
+
+    @Provides
+    @ApplicationScope
+    SharedPreferences providesSharedPreferences(@ApplicationContext Context context) {
+        return context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 
 }

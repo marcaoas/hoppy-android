@@ -8,4 +8,5 @@
     <string name="nav_shopping_list_title">Shopping List</string>
     <string name="nav_settings_title">Settings</string>
     <string name="nav_logout_title">Logout</string>
+    <string name="login_with_google">Login com google</string>
 </resources>

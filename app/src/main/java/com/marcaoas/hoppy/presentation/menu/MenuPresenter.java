@@ -2,6 +2,7 @@ package com.marcaoas.hoppy.presentation.menu;
 
 import com.marcaoas.hoppy.domain.interactors.user.GetCurrentUserInteractor;
 import com.marcaoas.hoppy.presentation.base.BasePresenter;
+import com.marcaoas.hoppy.presentation.menu.mappers.UserMenuMapper;
 import com.marcaoas.hoppy.presentation.menu.models.UserMenu;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -13,22 +14,20 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 public class MenuPresenter extends BasePresenter<MenuContract.View> {
 
     private final GetCurrentUserInteractor getUser;
+    private final UserMenuMapper userMenuMapper;
 
-    public MenuPresenter(GetCurrentUserInteractor getUser) {
+    public MenuPresenter(GetCurrentUserInteractor getUser, UserMenuMapper userMenuMapper) {
          this.getUser = getUser;
+         this.userMenuMapper = userMenuMapper;
     }
 
     public void loadUser() {
-        getUser.execute().map(user -> {
-            //TODO Fazer um mapper
-            UserMenu userMenu = new UserMenu();
-            userMenu.name = user.getName();
-            userMenu.email = user.getEmail();
-            userMenu.profileImageUrl = user.getProfileImageUrl();
-            return userMenu;
-        }).observeOn(AndroidSchedulers.mainThread()).subscribe(user -> {
-            view.setUser(user);
-        });
+        getUser.execute()
+                .map(userMenuMapper::map)
+                .observeOn(AndroidSchedulers.mainThread()) //TODO criar um wrapper para as threads
+                .subscribe(user -> {
+                    view.setUser(user);
+                });
     }
 
 }

@@ -15,6 +15,7 @@ public interface LoginContract {
         void hideLoading();
         void goToMain();
         void googleLogin();
+        void showGoogleLoginError();
     }
 
 }

@@ -2,9 +2,12 @@ package com.marcaoas.hoppy.presentation.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.marcaoas.hoppy.R;
 
@@ -14,10 +17,10 @@ import com.marcaoas.hoppy.R;
 
 public class GoogleAuthHelper {
 
-    public static final int GOOGLE_LOGIN_REQUEST_CODE = 500;
     private final LoginActivity context;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInOptions googleSignInOptions;
+    private GoogleSignInResult googleSignInResult;
 
     public GoogleAuthHelper(LoginActivity loginActivity) {
         this.context = loginActivity;
@@ -38,8 +41,20 @@ public class GoogleAuthHelper {
                 .build();
     }
 
-    public void login() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        context.startActivityForResult(signInIntent, GOOGLE_LOGIN_REQUEST_CODE);
+    public Intent getLoginIntent() {
+        return Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+    }
+
+    public void setLoginResultData(Intent data) {
+        googleSignInResult = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+    }
+
+    public boolean isLoginResultSuccess() {
+        return googleSignInResult != null && googleSignInResult.isSuccess();
+    }
+
+    public String getGoogleIdToken() {
+        GoogleSignInAccount account = googleSignInResult.getSignInAccount();
+        return account.getIdToken();
     }
 }

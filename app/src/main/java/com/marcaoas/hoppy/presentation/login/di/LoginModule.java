@@ -1,5 +1,7 @@
 package com.marcaoas.hoppy.presentation.login.di;
 
+import com.marcaoas.hoppy.domain.interactors.user.DoGoogleLoginInteractor;
+import com.marcaoas.hoppy.domain.repositories.UserRepository;
 import com.marcaoas.hoppy.presentation.di.PerActivity;
 import com.marcaoas.hoppy.presentation.login.GoogleAuthHelper;
 import com.marcaoas.hoppy.presentation.login.LoginActivity;
@@ -20,6 +22,13 @@ public class LoginModule {
         this.context = activity;
     }
 
+
+    @Provides
+    @PerActivity
+    public DoGoogleLoginInteractor providesGoogleLoginInteractor(UserRepository userRepository) {
+        return new DoGoogleLoginInteractor(userRepository);
+    }
+
     @Provides
     @PerActivity
     public GoogleAuthHelper providesGoogleAuthenticatorHelper() {
@@ -28,8 +37,8 @@ public class LoginModule {
 
     @Provides
     @PerActivity
-    public LoginPresenter providesLoginPresenter() {
-        return new LoginPresenter();
+    public LoginPresenter providesLoginPresenter(DoGoogleLoginInteractor googleLoginInteractor) {
+        return new LoginPresenter(googleLoginInteractor);
     }
 
 }

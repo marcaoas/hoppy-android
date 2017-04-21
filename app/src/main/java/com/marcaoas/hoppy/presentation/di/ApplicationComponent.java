@@ -3,6 +3,7 @@ package com.marcaoas.hoppy.presentation.di;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.marcaoas.hoppy.domain.interactors.user.GetCurrentUserInteractor;
 import com.marcaoas.hoppy.domain.repositories.SettingsRepository;
 import com.marcaoas.hoppy.domain.repositories.UserRepository;
 import com.marcaoas.hoppy.presentation.HoppyApplication;
@@ -25,4 +26,5 @@ public interface ApplicationComponent {
 
     UserRepository userRepository();
     SettingsRepository settingsRepository();
+    GetCurrentUserInteractor getCurrentUserInteractor();
 }

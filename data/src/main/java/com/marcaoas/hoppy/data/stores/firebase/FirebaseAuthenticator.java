@@ -26,6 +26,12 @@ class FirebaseAuthenticator implements OnCompleteListener<AuthResult> {
     private final SingleEmitter<FirebaseUser> emitter;
     private final String token;
 
+    public FirebaseAuthenticator(SingleEmitter<FirebaseUser> emitter) {
+        this.emitter = emitter;
+        this.token = null;
+        firebaseInstance = FirebaseAuth.getInstance();
+    }
+
     public FirebaseAuthenticator(SingleEmitter<FirebaseUser> emitter, String credential) {
         this.emitter = emitter;
         this.token = credential;
@@ -34,6 +40,16 @@ class FirebaseAuthenticator implements OnCompleteListener<AuthResult> {
 
     public FirebaseAuth getFirebaseInstance() {
         return firebaseInstance;
+    }
+
+    public void getCurrentUser() {
+        FirebaseUser user = firebaseInstance.getCurrentUser();
+        if(user!=null) {
+            emitter.onSuccess(user);
+        } else {
+            emitter.onError(new Exception("User not authenticated"));
+        }
+
     }
 
     public void signInWithGoogle() {

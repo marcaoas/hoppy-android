@@ -27,12 +27,6 @@ public class MenuModule {
 
     @Provides
     @PerActivity
-    public GetCurrentUserInteractor providesGetCurrentUserInteractor(UserRepository userRepository, SettingsRepository settingsRepository) {
-        return new GetCurrentUserInteractor(userRepository, settingsRepository);
-    }
-
-    @Provides
-    @PerActivity
     public MenuPresenter providesMenuPresenter(GetCurrentUserInteractor interactor, UserMenuMapper userMenuMapper) {
         return new MenuPresenter(interactor, userMenuMapper);
     }

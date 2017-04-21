@@ -6,5 +6,11 @@
     <dimen name="menu_header_content_margin">8dp</dimen>
     <dimen name="menu_user_name_size">14sp</dimen>
     <dimen name="menu_user_email_size">14sp</dimen>
+    <dimen name="login_logo_size">100dp</dimen>
+    <dimen name="login_default_padding">24dp</dimen>
+    <dimen name="login_button_text_size">16sp</dimen>
+    <dimen name="default_button_radius">4dp</dimen>
+    <dimen name="login_button_icon_size">24dp</dimen>
+    <dimen name="login_default_padding_half">16dp</dimen>
 
 </resources>

@@ -11,5 +11,6 @@ import io.reactivex.Single;
 
 public interface UserRepository {
     Flowable<User> getUser(String userId);
+    Single<User> getCurrentUser();
     Single<User> getWithGoogle(String googleIdToken);
 }

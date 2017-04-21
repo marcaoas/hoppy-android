@@ -8,5 +8,10 @@
     <string name="nav_shopping_list_title">Shopping List</string>
     <string name="nav_settings_title">Settings</string>
     <string name="nav_logout_title">Logout</string>
-    <string name="login_with_google">Login com google</string>
+    <string name="login_with_google">Entrar com o Google</string>
+    <string name="login_with_facebook">Entrar com o facebook</string>
+    <string name="loading_text_message">Carregando ...</string>
+    <string name="internet_error_message">No internet connection</string>
+    <string name="default_error_message">Sorry, an unexpected error occurred.</string>
+    <string name="login_with_google_error_message">Error trying to sign in with google</string>
 </resources>

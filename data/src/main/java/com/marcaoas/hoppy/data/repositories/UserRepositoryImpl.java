@@ -27,6 +27,12 @@ public class UserRepositoryImpl implements UserRepository {
         return diskStore.getUser(userId).map(userMapper::map);
     }
 
+
+    @Override
+    public Single<User> getCurrentUser() {
+        return diskStore.getCurrentUser().map(userMapper::map);
+    }
+
     @Override
     public Single<User> getWithGoogle(String googleIdToken) {
         return diskStore.getWithGoogle(googleIdToken).map(userMapper::map);

@@ -11,15 +11,10 @@
         android:roundIcon="@mipmap/android_o_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.main.MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".presentation.main.MainActivity" />
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-
-        <activity android:name=".presentation.login.LoginActivity" >
+        <activity android:name=".presentation.login.LoginActivity" />
+        <activity android:name=".presentation.startup.StartupActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

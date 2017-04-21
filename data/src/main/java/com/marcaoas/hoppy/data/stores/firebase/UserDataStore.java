@@ -3,6 +3,7 @@ package com.marcaoas.hoppy.data.stores.firebase;
 import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.marcaoas.hoppy.data.mappers.firebase.UserMapper;
 import com.marcaoas.hoppy.data.models.ApiUser;
 import com.marcaoas.hoppy.domain.models.User;
 
@@ -35,6 +36,13 @@ public class UserDataStore extends FirebaseDataStore {
         return Single.create(emitter -> {
             FirebaseAuthenticator firebaseAuthenticator = new FirebaseAuthenticator(emitter, credential);
             firebaseAuthenticator.signInWithGoogle();
+        });
+    }
+
+    public Single<FirebaseUser> getCurrentUser() {
+        return Single.create(emitter -> {
+            FirebaseAuthenticator firebaseAuthenticator = new FirebaseAuthenticator(emitter);
+            firebaseAuthenticator.getCurrentUser();
         });
     }
 }

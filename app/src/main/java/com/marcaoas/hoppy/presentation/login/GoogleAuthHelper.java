@@ -2,7 +2,6 @@ package com.marcaoas.hoppy.presentation.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -14,7 +13,6 @@ import com.marcaoas.hoppy.R;
 /**
  * Created by marco on 19/04/17.
  */
-
 public class GoogleAuthHelper {
 
     private final LoginActivity context;
@@ -55,6 +53,9 @@ public class GoogleAuthHelper {
 
     public String getGoogleIdToken() {
         GoogleSignInAccount account = googleSignInResult.getSignInAccount();
-        return account.getIdToken();
+        if(account != null){
+            return account.getIdToken();
+        }
+        return null;
     }
 }

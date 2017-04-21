@@ -5,6 +5,8 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -14,6 +16,7 @@ import com.marcaoas.hoppy.databinding.ActivityLoginBinding;
 import com.marcaoas.hoppy.presentation.base.BaseActivity;
 import com.marcaoas.hoppy.presentation.login.di.DaggerLoginComponent;
 import com.marcaoas.hoppy.presentation.login.di.LoginModule;
+import com.marcaoas.hoppy.presentation.login.views.LoginButtonViewModel;
 
 import javax.inject.Inject;
 
@@ -31,6 +34,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
 
     @Inject
     GoogleAuthHelper googleAuthenticator;
+    private LoginButtonViewModel googleButtonViewModel;
+    private LoginButtonViewModel facebookButtonViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +45,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
         initializeInjector();
         presenter.initView(this);
         googleAuthenticator.configure(this);
-        binding.loginWithGoogleButton.setOnClickListener(view -> presenter.googleLoginClicked());
+        setupView();
     }
 
     @Override
@@ -71,34 +76,49 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
                 .inject(this);
     }
 
+    private void setupView() {
+        googleButtonViewModel = LoginButtonViewModel.googleButton();
+        googleButtonViewModel.getOnClick().subscribe(button -> presenter.googleLoginClicked());
+        binding.setGoogleButtonViewModel(googleButtonViewModel);
+
+        facebookButtonViewModel = LoginButtonViewModel.facebookButton();
+        facebookButtonViewModel.getOnClick().subscribe(button -> presenter.facebookLoginClicked());
+        binding.setFacebookButtonViewModel(facebookButtonViewModel);
+    }
+
     @Override
     public void googleLogin(){
         startActivityForResult(googleAuthenticator.getLoginIntent(), GOOGLE_LOGIN_REQUEST_CODE);
     }
 
     @Override
+    public void facebookLogin(){
+        //TODO
+    }
+
+    @Override
     public void showLoading() {
-        Toast.makeText(this, "Loading", Toast.LENGTH_LONG).show(); //TODO fazer tela de loading
+        binding.setIsLoading(true);
     }
 
     @Override
     public void hideLoading() {
-        Toast.makeText(this, "hide loading", Toast.LENGTH_LONG).show(); //TODO fazer tela de loading
+        binding.setIsLoading(false);
     }
 
     @Override
     public void showError() {
-        Toast.makeText(this, "error trying to make loading", Toast.LENGTH_LONG).show(); //TODO fazer tela de erro
+        Snackbar.make(binding.getRoot(), R.string.default_error_message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showGoogleLoginError() {
-        Toast.makeText(this, "google login error", Toast.LENGTH_LONG).show(); //TODO google login error
+        Snackbar.make(binding.getRoot(), R.string.login_with_google_error_message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void showInternetError() {
-        Toast.makeText(this, "internet connection error", Toast.LENGTH_LONG).show(); //TODO fazer tela de erro
+        Snackbar.make(binding.getRoot(), R.string.internet_error_message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -108,6 +128,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Toast.makeText(this, "google signin error", Toast.LENGTH_LONG).show(); //TODO
+        Snackbar.make(binding.getRoot(), R.string.login_with_google_error_message, Snackbar.LENGTH_LONG).show();
     }
 }

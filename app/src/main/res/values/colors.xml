@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="darkStatusBar">#010101</color>
     <color name="colorAccent">#EB4E47</color>
-    <color name="defaultBackground">#CDD2D8</color>
+    <color name="defaultBackground">#f0f0f0</color>
     <color name="primaryColorContrast">#F5F7F9</color>
     <color name="facebook_button_background">#39579A</color>
     <color name="google_button_background">#FFFFFF</color>

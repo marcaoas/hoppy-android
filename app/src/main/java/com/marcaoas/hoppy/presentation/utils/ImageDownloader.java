@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
+import com.bumptech.glide.DrawableRequestBuilder;
 import com.bumptech.glide.Glide;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -22,10 +23,14 @@ public class ImageDownloader {
 
     @BindingAdapter({"app:imageUrl", "app:imageError", "app:imagePlaceholder", "app:roundedImage"})
     public static void loadImage(ImageView view, String url, Drawable errorImage, Drawable placeholderImage, boolean roundedImage) {
-        Glide.with(view.getContext())
-                .load(url)
-                .bitmapTransform(new CropCircleTransformation(view.getContext()))
-                .error(errorImage)
+        DrawableRequestBuilder<String> glideBuilder = Glide.with(view.getContext())
+                .load(url);
+        if(roundedImage){
+            glideBuilder
+                    .bitmapTransform(new CropCircleTransformation(view.getContext()));
+
+        }
+        glideBuilder.error(errorImage)
                 .placeholder(placeholderImage)
                 .into(view);
     }

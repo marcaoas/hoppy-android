@@ -5,6 +5,7 @@ package com.marcaoas.hoppy.presentation.recipes.model;
  */
 
 public class RecipeListItem {
+    public String id;
     public String title;
     public String imageUrl;
     public String beerType;

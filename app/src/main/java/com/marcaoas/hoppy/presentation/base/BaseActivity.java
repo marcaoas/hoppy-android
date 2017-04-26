@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.facebook.AccessToken;
 import com.marcaoas.hoppy.presentation.HoppyApplication;
 import com.marcaoas.hoppy.presentation.di.ApplicationComponent;
 

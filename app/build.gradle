@@ -32,16 +32,20 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    //test tools
     androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile "junit:junit:$junit_version"
 
+    //android tools
     compile "com.android.support:support-v4:$android_support_library_version"
     compile "com.android.support:appcompat-v7:$android_support_library_version"
     compile "com.android.support:design:$android_support_library_version"
     compile "com.android.support.constraint:constraint-layout:1.0.2"
 
+    //dagger
     compile "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
 
@@ -49,12 +53,18 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
     compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    //firebase for db and authentication
     compile "com.google.firebase:firebase-database:$firebase_version"
     compile "com.google.firebase:firebase-auth:$firebase_version"
     compile "com.google.android.gms:play-services-auth:$firebase_version"
+    compile 'com.facebook.android:facebook-android-sdk:4.22.0'
 
+    //app libs and tools
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    compile 'com.willowtreeapps.spruce:spruce-android:1.0.0'
+
+    //project dependencies
     compile project(':domain')
     compile project(':data')
 }

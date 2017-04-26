@@ -39,10 +39,25 @@ public class UserDataStore extends FirebaseDataStore {
         });
     }
 
+
+    public Single<FirebaseUser> getWithFacebook(String facebookToken){
+        return Single.create(emitter -> {
+            FirebaseAuthenticator firebaseAuthenticator = new FirebaseAuthenticator(emitter, facebookToken);
+            firebaseAuthenticator.signInWithFacebook();
+        });
+    }
+
     public Single<FirebaseUser> getCurrentUser() {
         return Single.create(emitter -> {
             FirebaseAuthenticator firebaseAuthenticator = new FirebaseAuthenticator(emitter);
             firebaseAuthenticator.getCurrentUser();
+        });
+    }
+
+    public Single<FirebaseUser> signInAnonymously() {
+        return Single.create(emitter -> {
+            FirebaseAuthenticator firebaseAuthenticator = new FirebaseAuthenticator(emitter);
+            firebaseAuthenticator.signInAnonymously();
         });
     }
 }

@@ -2,7 +2,8 @@ package com.marcaoas.hoppy.presentation.login.di;
 
 import com.marcaoas.hoppy.presentation.di.ApplicationComponent;
 import com.marcaoas.hoppy.presentation.di.PerActivity;
-import com.marcaoas.hoppy.presentation.login.GoogleAuthHelper;
+import com.marcaoas.hoppy.presentation.login.auth.FacebookAuthHelper;
+import com.marcaoas.hoppy.presentation.login.auth.GoogleAuthHelper;
 import com.marcaoas.hoppy.presentation.login.LoginActivity;
 import com.marcaoas.hoppy.presentation.login.LoginPresenter;
 
@@ -19,4 +20,5 @@ public interface LoginComponent {
 
     LoginPresenter loginPresenter();
     GoogleAuthHelper googleSignInAuthenticator();
+    FacebookAuthHelper facebookSignInAuthenticator();
 }

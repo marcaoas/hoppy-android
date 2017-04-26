@@ -16,6 +16,7 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/login_container_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
@@ -49,6 +50,13 @@
             app:layout_constraintBottom_toTopOf="@+id/facebook_login_button"
             app:visibility="@{!isLoading}"
             tools:visibility="gone"/>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/facebook_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone"/>
 
         <include
             android:layout_width="0dp"

@@ -16,6 +16,8 @@ public interface LoginContract {
         void goToMain();
         void googleLogin();
         void showGoogleLoginError();
+        void showFacebookLoginError();
+        void showFacebookLoginCancelled();
         void facebookLogin();
     }
 

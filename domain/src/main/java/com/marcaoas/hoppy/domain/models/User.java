@@ -10,6 +10,7 @@ public class User {
     private String name;
     private String email;
     private String profileImageUrl;
+    private boolean anonymous;
 
     public String getId() {
         return id;
@@ -41,5 +42,15 @@ public class User {
 
     public void setProfileImageUrl(String profileImageUrl) {
         this.profileImageUrl = profileImageUrl;
+    }
+
+    public boolean isAnonymous() {
+        return anonymous;
+    }
+
+    public static User createAnonymousUser() {
+        User user = new User();
+        user.anonymous = true;
+        return user;
     }
 }

@@ -9,5 +9,11 @@ public class UserMenu {
     public String name;
     public String email;
     public String profileImageUrl;
+    public boolean isAnonymous;
 
+    public static UserMenu createAnonymousUser() {
+        UserMenu userMenu = new UserMenu();
+        userMenu.isAnonymous = true;
+        return userMenu;
+    }
 }

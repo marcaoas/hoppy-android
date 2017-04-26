@@ -33,7 +33,6 @@
             android:layout_marginTop="@dimen/menu_header_padding"
             android:textSize="@dimen/menu_user_name_size"
             android:textStyle="bold"
-            tools:text="Marco Souza"
             android:text="@{user.name}"/>
 
         <TextView
@@ -42,8 +41,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/menu_header_content_margin"
             android:textSize="@dimen/menu_user_email_size"
-            tools:text="marcoasouza.1@gmail.com"
-            android:text="@{user.email}"/>
+            tools:text="anonymous@hoppy.com"
+            android:text="@{user.email}"
+            app:booleanVisibility="@{!user.isAnonymous}" />
+
+        <TextView
+            android:id="@+id/menu_sign_in_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/menu_header_content_margin"
+            style="@style/link_text_style"
+            android:clickable="true"
+            android:focusable="true"
+            app:booleanVisibility="@{user.isAnonymous}"
+            android:text="@string/menu_sign_in_action"/>
 
     </LinearLayout>
 </layout>

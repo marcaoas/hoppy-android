@@ -38,4 +38,14 @@ public class UserRepositoryImpl implements UserRepository {
         return diskStore.getWithGoogle(googleIdToken).map(userMapper::map);
     }
 
+    @Override
+    public Single<User> getWithFacebook(String facebookToken) {
+        return diskStore.getWithFacebook(facebookToken).map(userMapper::map);
+    }
+
+    @Override
+    public Single<User> signInAnonymously() {
+        return diskStore.signInAnonymously().map(userMapper::map);
+    }
+
 }

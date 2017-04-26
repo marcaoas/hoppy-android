@@ -7,6 +7,7 @@ import com.marcaoas.hoppy.domain.interactors.user.GetCurrentUserInteractor;
 import com.marcaoas.hoppy.domain.repositories.SettingsRepository;
 import com.marcaoas.hoppy.domain.repositories.UserRepository;
 import com.marcaoas.hoppy.presentation.HoppyApplication;
+import com.marcaoas.hoppy.presentation.Navigator;
 import com.marcaoas.hoppy.presentation.di.data.settings.SettingsDataModule;
 import com.marcaoas.hoppy.presentation.di.data.user.UserDataModule;
 
@@ -23,6 +24,7 @@ public interface ApplicationComponent {
 
     @ApplicationContext
     Context applicationContext();
+    Navigator navigator();
 
     UserRepository userRepository();
     SettingsRepository settingsRepository();

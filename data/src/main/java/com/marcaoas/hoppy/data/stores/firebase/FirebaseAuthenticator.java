@@ -6,9 +6,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.marcaoas.hoppy.data.utils.Logger;
 import com.marcaoas.hoppy.domain.models.User;
 
@@ -52,10 +55,19 @@ class FirebaseAuthenticator implements OnCompleteListener<AuthResult> {
 
     }
 
+
+    public void signInWithFacebook() {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token);
+        linkWith(credential);
+    }
+
     public void signInWithGoogle() {
         AuthCredential credential = GoogleAuthProvider.getCredential(token, null);
-        getFirebaseInstance().signInWithCredential(credential)
-                .addOnCompleteListener(this);
+        linkWith(credential);
+    }
+
+    private void linkWithCredentials(FirebaseUser user, AuthCredential credential) {
+        user.linkWithCredential(credential).addOnCompleteListener(this);
     }
 
     @Override
@@ -63,10 +75,48 @@ class FirebaseAuthenticator implements OnCompleteListener<AuthResult> {
         if (task.isSuccessful()) {
             Logger.d("signInWithCredential:success");
             FirebaseUser user = getFirebaseInstance().getCurrentUser();
-            emitter.onSuccess(user);
+            if(user.isAnonymous()){
+                emitter.onSuccess(user);
+            } else {
+                updateUserProfileData(user);
+            }
         } else {
             Logger.d("signInWithCredential:error");
             emitter.onError(new Exception("Firebase Sign in failed"));
+        }
+    }
+
+
+    private void updateUserProfileData(FirebaseUser user) {
+        int providerDataSize = user.getProviderData().size();
+        UserInfo providerData = user.getProviderData().get(providerDataSize > 0 ? providerDataSize - 1 : 0);
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(providerData.getDisplayName())
+                .setPhotoUri(providerData.getPhotoUrl())
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        emitter.onSuccess(user);
+                    }
+                });
+    }
+
+    public void signInAnonymously() {
+        getFirebaseInstance().signInAnonymously()
+                .addOnCompleteListener(this);
+    }
+
+    public void linkWith(AuthCredential credential) {
+        FirebaseUser currentUser = getFirebaseInstance().getCurrentUser();
+        if(currentUser != null) {
+            linkWithCredentials(currentUser, credential);
+        } else {
+            getFirebaseInstance().signInAnonymously().addOnCompleteListener(
+                    user ->
+                            linkWithCredentials(getFirebaseInstance().getCurrentUser(), credential)
+            );
         }
     }
 }

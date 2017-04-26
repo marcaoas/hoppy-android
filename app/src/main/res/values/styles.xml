@@ -8,4 +8,20 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/darkStatusBar</item>
     </style>
+
+    <style name="link_text_style">
+        <item name="android:textColor">@drawable/link_text_color</item>
+        <item name="android:textSize">@dimen/link_text_default_size</item>
+        <item name="android:background">@drawable/link_text_background</item>
+    </style>
+
+    <style name="default_list_item_title">
+        <item name="android:textSize">@dimen/default_list_item_title_size</item>
+        <item name="android:textColor">@color/default_title_text_color</item>
+    </style>
+
+    <style name="default_list_item_extra_info">
+        <item name="android:textSize">@dimen/default_list_extra_info_size</item>
+        <item name="android:textColor">@color/default_extra_info_text_color</item>
+    </style>
 </resources>

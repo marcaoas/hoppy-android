@@ -1,9 +1,11 @@
 package com.marcaoas.hoppy.presentation.login.di;
 
+import com.marcaoas.hoppy.domain.interactors.user.DoFacebookLoginInteractor;
 import com.marcaoas.hoppy.domain.interactors.user.DoGoogleLoginInteractor;
 import com.marcaoas.hoppy.domain.repositories.UserRepository;
 import com.marcaoas.hoppy.presentation.di.PerActivity;
-import com.marcaoas.hoppy.presentation.login.GoogleAuthHelper;
+import com.marcaoas.hoppy.presentation.login.auth.FacebookAuthHelper;
+import com.marcaoas.hoppy.presentation.login.auth.GoogleAuthHelper;
 import com.marcaoas.hoppy.presentation.login.LoginActivity;
 import com.marcaoas.hoppy.presentation.login.LoginPresenter;
 
@@ -31,14 +33,26 @@ public class LoginModule {
 
     @Provides
     @PerActivity
+    public DoFacebookLoginInteractor providesFacebookLoginInteractor(UserRepository userRepository) {
+        return new DoFacebookLoginInteractor(userRepository);
+    }
+
+    @Provides
+    @PerActivity
+    public FacebookAuthHelper providesFacebookAuthHelper() {
+        return new FacebookAuthHelper(context);
+    }
+
+    @Provides
+    @PerActivity
     public GoogleAuthHelper providesGoogleAuthenticatorHelper() {
         return new GoogleAuthHelper(context);
     }
 
     @Provides
     @PerActivity
-    public LoginPresenter providesLoginPresenter(DoGoogleLoginInteractor googleLoginInteractor) {
-        return new LoginPresenter(googleLoginInteractor);
+    public LoginPresenter providesLoginPresenter(DoGoogleLoginInteractor googleLoginInteractor, DoFacebookLoginInteractor doFacebookLoginInteractor) {
+        return new LoginPresenter(googleLoginInteractor, doFacebookLoginInteractor);
     }
 
 }

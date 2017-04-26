@@ -14,6 +14,7 @@ public class UserMenuMapper {
         userMenu.name = user.getName();
         userMenu.email = user.getEmail();
         userMenu.profileImageUrl = user.getProfileImageUrl();
+        userMenu.isAnonymous = user.isAnonymous();
         return userMenu;
     }
 

@@ -19,6 +19,9 @@ public class GetCurrentUserInteractor extends BaseInteractor {
     }
 
     public Single<User> execute() {
-        return userRepository.getCurrentUser();
+        Single<User> user = userRepository.getCurrentUser().onErrorResumeNext(error -> {
+           return userRepository.signInAnonymously();
+        });
+        return user;
     }
 }

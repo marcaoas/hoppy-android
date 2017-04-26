@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Hoppy</string>
+
+    <string name="facebook_app_id">393500181021830</string>
+
     <string name="main_fragment_title">Welcome to Hoppy</string>
     <string name="nav_brew_steps_title">Brew Steps</string>
     <string name="nav_my_recipes_title">My Recipes</string>
@@ -14,4 +17,9 @@
     <string name="internet_error_message">No internet connection</string>
     <string name="default_error_message">Sorry, an unexpected error occurred.</string>
     <string name="login_with_google_error_message">Error trying to sign in with google</string>
+    <string name="anonymous_user_name">Hello stranger...</string>
+    <string name="menu_sign_in_action">Sign in</string>
+    <string name="login_with_facebook_cancelled_message">Facebook login was cancelled</string>
+    <string name="login_with_facebook_error_message">Error trying to sign in with facebook</string>
+    <string name="my_recipes_fragment_title">Your Recipes</string>
 </resources>

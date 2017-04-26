@@ -81,7 +81,7 @@ public class LoginButtonViewModel {
     public static LoginButtonViewModel facebookButton(){
         return new LoginButtonViewModel(
                 R.string.login_with_facebook,
-                R.drawable.ic_google_button,
+                R.drawable.ic_facebook_button,
                 R.drawable.facebook_button_background,
                 R.color.facebook_login_text_color);
     }

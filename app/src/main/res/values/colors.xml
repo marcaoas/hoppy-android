@@ -11,4 +11,10 @@
     <color name="google_button_border">#3D000000</color>
     <color name="facebook_login_text_color">#FFFFFF</color>
     <color name="google_login_text_color">#89000000</color>
+
+    <color name="link_color">#4A90E2</color>
+    <color name="link_color_highlighted">#664A90E2</color>
+    <color name="link_color_disabled">#4C000000</color>
+    <color name="default_title_text_color">#131313</color>
+    <color name="default_extra_info_text_color">#9DA5AF</color>
 </resources>

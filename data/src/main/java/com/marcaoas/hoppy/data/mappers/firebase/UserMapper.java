@@ -23,14 +23,19 @@ public class UserMapper {
     }
 
     public User map(FirebaseUser firebaseUser) {
-        User user = new User();
-        user.setId(firebaseUser.getUid());
-        user.setName(firebaseUser.getDisplayName());
-        user.setEmail(firebaseUser.getEmail());
-        Uri profileUri = firebaseUser.getPhotoUrl();
-        if(profileUri!=null){
-            user.setProfileImageUrl(profileUri.toString());
+        User user;
+        if(firebaseUser.isAnonymous()){
+            user = User.createAnonymousUser();
+        } else {
+            user = new User();
+            user.setName(firebaseUser.getDisplayName());
+            user.setEmail(firebaseUser.getEmail());
+            Uri profileUri = firebaseUser.getPhotoUrl();
+            if(profileUri!=null){
+                user.setProfileImageUrl(profileUri.toString());
+            }
         }
+        user.setId(firebaseUser.getUid());
         return user;
     }
 

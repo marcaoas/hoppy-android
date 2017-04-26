@@ -11,6 +11,15 @@ public interface MenuContract {
 
     interface View extends BaseView {
         void setUser(UserMenu user);
+        void goToLogin();
+        void goToBrewSteps();
+        void goToMyRecipes();
+        void goToInventory();
+        void goToBrewingTools();
+        void goToShoppingList();
+        void goToSettings();
+        void logout();
+        void closeMenu();
     }
 
 }

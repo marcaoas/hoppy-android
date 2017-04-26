@@ -1,4 +1,4 @@
-package com.marcaoas.hoppy.presentation.login;
+package com.marcaoas.hoppy.presentation.login.auth;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.marcaoas.hoppy.R;
+import com.marcaoas.hoppy.presentation.login.LoginActivity;
 
 /**
  * Created by marco on 19/04/17.

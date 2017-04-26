@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.marcaoas.hoppy.presentation.HoppyApplication;
+import com.marcaoas.hoppy.presentation.Navigator;
 
 import dagger.Module;
 import dagger.Provides;
@@ -28,6 +29,11 @@ public class ApplicationModule {
         return application;
     }
 
+    @Provides
+    @ApplicationScope
+    Navigator providesNavigator() {
+        return new Navigator();
+    }
 
     @Provides
     @ApplicationScope

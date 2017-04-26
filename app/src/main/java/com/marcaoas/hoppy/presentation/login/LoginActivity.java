@@ -6,17 +6,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.marcaoas.hoppy.R;
 import com.marcaoas.hoppy.databinding.ActivityLoginBinding;
 import com.marcaoas.hoppy.presentation.base.BaseActivity;
+import com.marcaoas.hoppy.presentation.login.auth.FacebookAuthHelper;
+import com.marcaoas.hoppy.presentation.login.auth.GoogleAuthHelper;
 import com.marcaoas.hoppy.presentation.login.di.DaggerLoginComponent;
 import com.marcaoas.hoppy.presentation.login.di.LoginModule;
 import com.marcaoas.hoppy.presentation.login.views.LoginButtonViewModel;
+import com.marcaoas.hoppy.presentation.main.MainActivity;
 
 import javax.inject.Inject;
 
@@ -34,6 +36,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
 
     @Inject
     GoogleAuthHelper googleAuthenticator;
+
+    @Inject
+    FacebookAuthHelper facebookAuthenticator;
+
     private LoginButtonViewModel googleButtonViewModel;
     private LoginButtonViewModel facebookButtonViewModel;
 
@@ -45,6 +51,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
         initializeInjector();
         presenter.initView(this);
         googleAuthenticator.configure(this);
+        facebookAuthenticator.configure(binding.facebookButton);
         setupView();
     }
 
@@ -65,6 +72,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
         if (requestCode == GOOGLE_LOGIN_REQUEST_CODE) {
             googleAuthenticator.setLoginResultData(data);
             presenter.googleLoginEnded(googleAuthenticator.isLoginResultSuccess(), googleAuthenticator.getGoogleIdToken());
+        } else {
+            facebookAuthenticator.activityResult(requestCode, resultCode, data);
         }
     }
 
@@ -84,6 +93,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
         facebookButtonViewModel = LoginButtonViewModel.facebookButton();
         facebookButtonViewModel.getOnClick().subscribe(button -> presenter.facebookLoginClicked());
         binding.setFacebookButtonViewModel(facebookButtonViewModel);
+        configureScreenAnimation();
+    }
+
+    private void configureScreenAnimation() {
+        //TODO animation with spruce
     }
 
     @Override
@@ -93,7 +107,15 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
 
     @Override
     public void facebookLogin(){
-        //TODO
+        binding.facebookButton.performClick();
+    }
+
+    public void onFacebookLoginSuccess(String token){
+        presenter.facebookLoginSuccess(token);
+    }
+
+    public void onFacebookLoginCancelled(boolean error){
+        presenter.facebookLoginCancelled(error);
     }
 
     @Override
@@ -117,13 +139,25 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, G
     }
 
     @Override
+    public void showFacebookLoginError() {
+        Snackbar.make(binding.getRoot(), R.string.login_with_facebook_error_message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showFacebookLoginCancelled() {
+        Snackbar.make(binding.getRoot(), R.string.login_with_facebook_cancelled_message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showInternetError() {
         Snackbar.make(binding.getRoot(), R.string.internet_error_message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void goToMain() {
-        Toast.makeText(this, "go to main", Toast.LENGTH_LONG).show(); //TODO ir para main
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
